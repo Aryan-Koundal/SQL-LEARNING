@@ -222,3 +222,53 @@ SELECT *FROM view2;
 SELECT *FROM view2 WHERE marks>96;
 SHOW DATABASES;
 SHOW TABLES;
+
+
+-- ================ --
+
+CREATE DATABASE student_management;
+USE student_management;
+create Table students(
+id INT AUTO_INCREMENT PRIMARY KEY,
+name varchar(30),
+rollno int,
+class varchar(20),
+email varchar(255),
+phone varchar(15)
+);
+INSERT INTO students (name, rollno, class, email, phone)
+VALUES ("Aryan",101,"creator","abc@exp","####");
+
+select * from students;
+
+USE student_management;
+CREATE TABLE subjects(
+id INT AUTO_INCREMENT PRIMARY KEY ,
+SUBJECT_name VARCHAR(50),
+SUBJECT_code VARCHAR(20),
+SUBJECT_type VARCHAR(30),
+class varchar(40)
+);
+
+insert into subjects(SUBJECT_name,SUBJECT_code,SUBJECT_type,class)
+values ("xyz","101","pratical","abc");
+
+ALTER TABLE subjects
+RENAME COLUMN class TO class_name;
+select *from subjects;
+
+USE student_management;
+
+CREATE TABLE marks (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    student_id INT,
+    subject_id INT,
+    marks INT,
+
+    FOREIGN KEY (student_id) REFERENCES students(id),
+    FOREIGN KEY (subject_id) REFERENCES subjects(id)
+);
+
+insert into marks (student_id, subject_id, marks)
+values (1, 1, 85);
+select *from marks;
